@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greek DIY - กรีกโยเกิร์ตโฮมเมด พรีเมียม DIY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #5c3d2e;
+            --primary-light: #8b5a42;
+            --accent: #e0a96d;
+            --accent-soft: #f4e8c1;
+            --bg-base: #faf6f0;
+            --bg-card: #ffffff;
+            --text-dark: #2c221e;
+            --text-muted: #7a6e67;
+            --line-green: #06c755;
+            --line-green-hover: #05b34c;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow: 0 10px 30px rgba(92, 61, 46, 0.08);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 120px;
+        }
+
+        /* Header & Banner */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px 30px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        header .logo-badge {
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 4px 14px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -20px auto 0;
+            padding: 0 20px;
+        }
+
+        /* Layout Grid */
+        .builder-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .builder-grid {
+                grid-template-columns: 1fr 340px;
+            }
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--bg-base);
+            padding-bottom: 10px;
+        }
+
+        .card-title span.step {
+            background: var(--accent-soft);
+            color: var(--primary);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin: 12px 0 8px;
+        }
+
+        /* Option Item Boxes */
+        .option-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+        }
+
+        .option-item {
+            position: relative;
+        }
+
+        .option-item input[type="radio"],
+        .option-item input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .option-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 12px;
+            background: var(--bg-base);
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            height: 100%;
+        }
+
+        .option-label .icon {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+        }
+
+        .option-label .name {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .option-label .price {
+            font-size: 0.85rem;
+            color: var(--primary-light);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* Selection States */
+        .option-item input:checked + .option-label {
+            background: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(92, 61, 46, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Disabled State for Toppings */
+        .option-item input:disabled + .option-label {
+            background-color: #f0f0f0;
+            border-color: transparent;
+            color: #aaa;
+            cursor: not-allowed;
+            opacity: 0.6;
+            box-shadow: none;
+            transform: none;
+        }
+        
+        .option-item input:disabled + .option-label .name,
+        .option-item input:disabled + .option-label .price {
+            color: #aaa;
+        }
+
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #e2d9d0;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+            background-color: #fcfbfa;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            background-color: #fff;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Order Summary Sidebar */
+        .summary-card {
+            position: sticky;
+            top: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .summary-item .title {
+            color: var(--text-muted);
+        }
+
+        .summary-item .val {
+            font-weight: 500;
+            text-align: right;
+        }
+
+        .summary-toppings-list {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding-left: 12px;
+            margin-top: 4px;
+            margin-bottom: 10px;
+            white-space: pre-line;
+        }
+
+        .divider {
+            height: 1px;
+            background: #eee;
+            margin: 16px 0;
+        }
+
+        .total-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* LINE Order Button */
+        .btn-line {
+            width: 100%;
+            background-color: var(--line-green);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px 14px rgba(6, 199, 85, 0.3);
+        }
+
+        .btn-line:hover {
+            background-color: var(--line-green-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-line:active {
+            transform: translateY(0);
+        }
+
+        .btn-line svg {
+            width: 26px;
+            height: 26px;
+            fill: currentColor;
+        }
+
+        /* Mobile Bottom Bar Fix */
+        @media (max-width: 767px) {
+            .summary-card {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="logo-badge">Homemade & Fresh</span>
+        <h1>Greek DIY Yogurt</h1>
+        <p>จัดจานกรีกโยเกิร์ตในสไตล์คุณ สด ใหม่ เข้มข้น อร่อยทุกคำ</p>
+    </header>
+
+    <div class="container">
+        <div class="builder-grid">
+            
+            <!-- Main Form Step Section -->
+            <div class="main-options">
+                
+                <!-- Step 1: Base Yogurt -->
+                <div class="card">
+                    <div class="card-title">
+                        <span class="step">1</span> เลือกรสชาติกรีกโยเกิร์ต (Base)
+                    </div>
+                    <div class="option-group">
+                        <div class="option-item">
+                            <input type="radio" id="base-original" name="base" value="รสออริจินัล" checked onchange="calculateTotal()">
+                            <label for="base-original" class="option-label">
+                                <span class="icon">🥛</span>
+                                <span class="name">ออริจินัล</span>
+                                <span class="price">ฟรี</span>
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" id="base-honey" name="base" value="รสน้ำผึ้งแท้" onchange="calculateTotal()">
+                            <label for="base-honey" class="option-label">
+                                <span class="icon">🍯</span>
+                                <span class="name">น้ำผึ้งแท้</span>
+                                <span class="price">ฟรี</span>
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" id="base-strawberry" name="base" value="รสสตรอว์เบอร์รี" onchange="calculateTotal()">
+                            <label for="base-strawberry" class="option-label">
+                                <span class="icon">🍓</span>
+                                <span class="name">สตรอว์เบอร์รี</span>
+                                <span class="price">ฟรี</span>
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" id="base-matcha" name="base" value="รสชาเขียวมัทฉะ" onchange="calculateTotal()">
+                            <label for="base-matcha" class="option-label">
+                                <span class="icon">🍵</span>
+                                <span class="name">มัทฉะอุจิ</span>
+                                <span class="price">ฟรี</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Size & Options -->
+                <div class="card">
+                    <div class="card-title">
+                        <span class="step">2</span> เลือกตัวเลือกโยเกิร์ต (Size & Combo)
+                    </div>
+                    <div class="option-group">
+                        <div class="option-item">
+                            <input type="radio" id="size-1scoop" name="size" value="1 สกูป (60g)" data-price="40" checked onchange="checkScoopOption()">
+                            <label for="size-1scoop" class="option-label">
+                                <span class="icon">🍨</span>
+                                <span class="name">1 สกูป (60g)</span>
+                                <span class="price">40 ฿</span>
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" id="size-1scoop-fruit" name="size" value="1 สกูป + ผลไม้" data-price="50" onchange="checkScoopOption()">
+                            <label for="size-1scoop-fruit" class="option-label">
+                                <span class="icon">🍨🍓</span>
+                                <span class="name">1 สกูป + ผลไม้</span>
+                                <span class="price">50 ฿</span>
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" id="size-2scoop" name="size" value="2 สกูป (120g)" data-price="60" onchange="checkScoopOption()">
+                            <label for="size-2scoop" class="option-label">
+                                <span class="icon">🍨🍨</span>
+                                <span class="name">2 สกูป (120g)</span>
+                                <span class="price">60 ฿</span>
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" id="size-2scoop-fruit" name="size" value="2 สกูป + ผลไม้" data-price="80" onchange="checkScoopOption()">
+                            <label for="size-2scoop-fruit" class="option-label">
+                                <span class="icon">🍨🍨🍓</span>
+                                <span class="name">2 สกูป + ผลไม้</span>
+                                <span class="price">80 ฿</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Toppings -->
+                <div class="card" id="topping-card">
+                    <div class="card-title">
+                        <span class="step">3</span> เลือกท็อปปิ้งผลไม้ (Toppings)
+                    </div>
+
+                    <div class="section-subtitle">🍎 ผลไม้ธรรมดา (ฟรี ไม่เกิน 3 ชนิด)</div>
+                    <div class="option-group">
+                        <div class="option-item">
+                            <input type="checkbox" id="top-banana" name="topping-normal" value="กล้วยหอม" onchange="handleNormalToppingChange(this)">
+                            <label for="top-banana" class="option-label">
+                                <span class="icon">🍌</span>
+                                <span class="name">กล้วยหอม</span>
+                                <span class="price">ฟรี</span>
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <input type="checkbox" id="top-apple" name="topping-normal" value="แอปเปิ้ลแดง" onchange="handleNormalToppingChange(this)">
+                            <label for="top-apple" class="option-label">
+                                <span class="icon">🍎</span>
+                                <span class="name">แอปเปิ้ลแดง</span>
+                                <span class="price">ฟรี</span>
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <input type="checkbox" id="top-orange" name="topping-normal" value="ส้ม" onchange="handleNormalToppingChange(this)">
+                            <label for="top-orange" class="option-label">
+                                <span class="icon">🍊</span>
+                                <span class="name">ส้ม</span>
+                                <span class="price">ฟรี</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="section-subtitle" style="margin-top: 20px;">🥑 ผลไม้ Premium (+10 บาท)</div>
+                    <div class="option-group">
+                        <div class="option-item">
+                            <input type="checkbox" id="top-avocado" name="topping-premium" value="อโวคาโด้" data-price="10" onchange="calculateTotal()">
+                            <label for="top-avocado" class="option-label">
+                                <span class="icon">🥑</span>
+                                <span class="name">อโวคาโด้</span>
+                                <span class="price">+10 ฿</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Customer Details -->
+                <div class="card">
+                    <div class="card-title">
+                        <span class="step">4</span> ข้อมูลการจัดส่ง
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-name">ชื่อผู้สั่งซื้อ *</label>
+                        <input type="text" id="cust-name" class="form-control" placeholder="ระบุชื่อของคุณ" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-phone">เบอร์โทรศัพท์ *</label>
+                        <input type="tel" id="cust-phone" class="form-control" placeholder="08X-XXX-XXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-address">สถานที่จัดส่ง / หมายเหตุเพิ่มเติม</label>
+                        <textarea id="cust-address" class="form-control" placeholder="ระบุที่อยู่จัดส่ง หรือรายละเอียดพิเศษ เช่น หวานน้อย"></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sidebar Summary Section -->
+            <div class="sidebar">
+                <div class="card summary-card">
+                    <div class="card-title" style="border:none; margin-bottom:10px;">
+                        สรุปรายการสั่งซื้อ
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="summary-item">
+                        <span class="title">รสชาติ:</span>
+                        <span class="val" id="sum-base">รสออริจินัล</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="title">ตัวเลือก:</span>
+                        <span class="val" id="sum-size">1 สกูป (60g)</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="title">ท็อปปิ้ง:</span>
+                        <span class="val" id="sum-topping-count">0 รายการ</span>
+                    </div>
+                    <div class="summary-toppings-list" id="sum-toppings-detail">
+                        - ไม่มีท็อปปิ้ง -
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="total-price">
+                        <span>ราคารวม</span>
+                        <span id="sum-total">40 ฿</span>
+                    </div>
+
+                    <button type="button" class="btn-line" onclick="sendToLine()">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.185 1.039.646 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.844 2.572-6.001zm-16.2 2.256h-2.1v-4.5c0-.331-.269-.6-.6-.6s-.6.269-.6.6v5.1c0 .331.269.6.6.6h2.7c.331 0 .6-.269.6-.6s-.269-.6-.6-.6zm3.6 0h-1.2v-4.5c0-.331-.269-.6-.6-.6s-.6.269-.6.6v5.1c0 .331.269.6.6.6h1.8c.331 0 .6-.269.6-.6s-.269-.6-.6-.6zm2.7-2.1l-1.423-2.277c-.092-.147-.253-.235-.426-.235-.331 0-.6.269-.6.6v4.5c0 .331.269.6.6.6s.6-.269.6-.6v-2.223l1.423 2.277c.092.147.253.235.426.235.331 0 .6-.269.6-.6v-4.5c0-.331-.269-.6-.6-.6s-.6.269-.6.6v2.223zm4.5 2.1h-2.1v-4.5c0-.331-.269-.6-.6-.6s-.6.269-.6.6v5.1c0 .331.269.6.6.6h2.7c.331 0 .6-.269.6-.6s-.269-.6-.6-.6z"/>
+                        </svg>
+                        สั่งซื้อผ่าน LINE
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const LINE_STORE_ID = "@raweechon"; 
+
+        // ตรวจสอบตัวเลือก Scoop ว่าจะเปิดหรือปิดการเลือกท็อปปิ้ง
+        function checkScoopOption() {
+            const selectedSize = document.querySelector('input[name="size"]:checked');
+            const isNoFruit = selectedSize && (selectedSize.value === "1 สกูป (60g)" || selectedSize.value === "2 สกูป (120g)");
+            const toppingInputs = document.querySelectorAll('input[name="topping-normal"], input[name="topping-premium"]');
+            const toppingCard = document.getElementById('topping-card');
+
+            if (isNoFruit) {
+                // ถ้าเลือกแบบไม่มีผลไม้ ให้ปลดเช็กและ Disable ท็อปปิ้งทั้งหมด
+                toppingInputs.forEach(input => {
+                    input.checked = false;
+                    input.disabled = true;
+                });
+                toppingCard.style.opacity = "0.6";
+            } else {
+                // ถ้าเลือกแบบมีผลไม้ ให้ Enable ท็อปปิ้งทั้งหมด
+                toppingInputs.forEach(input => {
+                    input.disabled = false;
+                });
+                toppingCard.style.opacity = "1";
+            }
+
+            calculateTotal();
+        }
+
+        function handleNormalToppingChange(element) {
+            const checkedNormalToppings = document.querySelectorAll('input[name="topping-normal"]:checked');
+            if (checkedNormalToppings.length > 3) {
+                alert("ผลไม้ธรรมดาสามารถเลือกได้ไม่เกิน 3 ชนิดครับ");
+                element.checked = false;
+                return;
+            }
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            // Base Yogurt (รสชาติ - ไม่นำมาคิดราคา)
+            const baseElement = document.querySelector('input[name="base"]:checked');
+            const baseName = baseElement ? baseElement.value : '';
+
+            // Size / Combo Options
+            const sizeElement = document.querySelector('input[name="size"]:checked');
+            const sizeName = sizeElement ? sizeElement.value : '';
+            const sizePrice = sizeElement ? parseInt(sizeElement.getAttribute('data-price')) : 0;
+
+            // Normal Toppings (ไม่คิดเงิน)
+            const normalToppingElements = document.querySelectorAll('input[name="topping-normal"]:checked');
+            let normalToppingNames = [];
+            normalToppingElements.forEach(item => {
+                normalToppingNames.push(item.value);
+            });
+
+            // Premium Toppings (+10 บาท)
+            const premiumToppingElements = document.querySelectorAll('input[name="topping-premium"]:checked');
+            let premiumToppingPriceSum = 0;
+            let premiumToppingNames = [];
+            premiumToppingElements.forEach(item => {
+                premiumToppingPriceSum += parseInt(item.getAttribute('data-price'));
+                premiumToppingNames.push(item.value + " (+10฿)");
+            });
+
+            // Calculate Total
+            const total = sizePrice + premiumToppingPriceSum;
+
+            // Combined Topping List
+            const allToppingNames = [...normalToppingNames, ...premiumToppingNames];
+
+            // Update UI Summary
+            document.getElementById('sum-base').innerText = baseName;
+            document.getElementById('sum-size').innerText = `${sizeName} (${sizePrice}฿)`;
+            document.getElementById('sum-topping-count').innerText = allToppingNames.length + " รายการ";
+            
+            if (allToppingNames.length > 0) {
+                document.getElementById('sum-toppings-detail').innerText = "- " + allToppingNames.join("\n- ");
+            } else {
+                document.getElementById('sum-toppings-detail').innerText = "- ไม่มีท็อปปิ้ง -";
+            }
+
+            document.getElementById('sum-total').innerText = total + " ฿";
+
+            return {
+                baseName,
+                sizeName,
+                sizePrice,
+                allToppingNames,
+                total
+            };
+        }
+
+        function sendToLine() {
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+
+            if (!name || !phone) {
+                alert("กรุณากรอกชื่อและเบอร์โทรศัพท์ก่อนกดสั่งซื้อครับ");
+                return;
+            }
+
+            const currentOrder = calculateTotal();
+
+            let message = `🛒 *ออเดอร์กรีกโยเกิร์ตใหม่ (DIY)*\n`;
+            message += `------------------------------\n`;
+            message += `🥣 *รสชาติ:* ${currentOrder.baseName}\n`;
+            message += `🍨 *ตัวเลือก:* ${currentOrder.sizeName} (${currentOrder.sizePrice} บาท)\n`;
+            
+            if (currentOrder.allToppingNames.length > 0) {
+                message += `🍓 *ท็อปปิ้งผลไม้:*\n  • ` + currentOrder.allToppingNames.join("\n  • ") + `\n`;
+            } else {
+                message += `🍓 *ท็อปปิ้งผลไม้:* ไม่เลือกท็อปปิ้ง\n`;
+            }
+
+            message += `------------------------------\n`;
+            message += `💰 *ราคารวม:* ${currentOrder.total} บาท\n`;
+            message += `------------------------------\n`;
+            message += `👤 *ชื่อลูกค้า:* ${name}\n`;
+            message += `📞 *เบอร์โทร:* ${phone}\n`;
+            if (address) {
+                message += `📍 *ที่อยู่/หมายเหตุ:* ${address}\n`;
+            }
+
+            const encodedMessage = encodeURIComponent(message);
+            const lineRedirectUrl = `https://line.me/R/oaMessage/${LINE_STORE_ID}/?${encodedMessage}`;
+
+            window.open(lineRedirectUrl, '_blank');
+        }
+
+        // Initialize On Load
+        window.onload = function() {
+            checkScoopOption();
+        };
+    </script>
+</body>
+</html>
